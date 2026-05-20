@@ -1,0 +1,333 @@
+    <!DOCTYPE html>
+    <html>
+        <head>
+            <title>MusicPlayer</title>
+            <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&amp;display=swap" rel="stylesheet">
+            <script src="https://kit.fontawesome.com/00c3ccf935.js" crossorigin="anonymous"></script>
+            <style>
+
+                body{
+                    background-color: rgba(12, 0, 31, 0.904);
+                    display: flex;
+                    justify-content: center;
+                    margin : 0px;
+                    align-items: center;
+                    min-height: 100vh;
+                    font-family: Roboto, Arial;
+                    
+                    
+                    
+                }
+
+                .Container{
+                
+                
+                    
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: center;
+                    height: 800px;
+                    width: 410px;
+                    padding-top: 30px;
+                flex-direction: column;
+                    border-radius: 30px;
+                    
+                background-color: rgba(22, 11, 46, 0.95);
+        box-shadow: 0px 0px 60px rgba(89, 0, 255, 0.2);
+                }
+
+                .Pic-container{
+                    display: block;
+                
+                }
+                
+                .Song-Pic{
+                    height: 250px;
+                    width: 380px;
+                    border-radius: 25px;
+                    box-shadow: 0px 10px 100px rgba(89, 0, 255, 0.336);
+                }
+
+                .Name-Song{
+                    color: rgba(255, 255, 255, 0.938);
+
+                
+                }
+                .Type-song{
+                    color: rgba(255, 255, 255, 0.849);
+                    font-size: 20px;
+                
+                    margin-top: -10px;
+                }
+
+                .Texte{
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    
+                }
+                
+        
+                .time-stamps {
+                    display: flex;
+                    justify-content: space-between;
+                    width: 300px;
+                    color: white;
+                    font-size: 12px;
+                    margin-top: 5px;
+                }
+
+                .volume-container {
+                    margin-top: 30px;
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                }
+
+                input[type="range"] {
+        -webkit-appearance: none;
+        width: 300px;
+        height: 6px;
+        
+        background: linear-gradient(to right, #d122e3 0%, rgba(255, 255, 255, 0.1) 0%);
+        border-radius: 5px;
+        cursor: pointer;
+        outline: none;
+        margin-top: 15px;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        height: 18px;
+        width: 18px;
+        background: #fff; 
+        border: 3px solid #d122e3;
+        border-radius: 50%;
+        box-shadow: 0px 0px 15px rgba(209, 34, 227, 0.9); 
+        cursor: pointer;
+        position: relative;
+        z-index: 2;
+    }
+
+    input[type="range"]::-moz-range-thumb {
+        height: 18px;
+        width: 18px;
+        background: #fff;
+        border: 3px solid #d122e3;
+        border-radius: 50%;
+        box-shadow: 0px 0px 15px rgba(209, 34, 227, 0.9);
+    } 
+
+        .controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    margin-top: 10px;
+}
+
+.ctrl-btn {
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 20px;
+    cursor: pointer;
+    transition: color 0.2s, transform 0.15s;
+    padding: 8px;
+    border-radius: 50%;
+}
+
+.ctrl-btn:hover {
+    color: #d122e3;
+    transform: scale(1.15);
+}
+
+.ctrl-btn.active {
+    color: #d122e3;
+}
+
+.play-btn {
+    background: #d122e3;
+    color: white !important;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 0px 30px rgba(209, 34, 227, 0.7);
+    transition: transform 0.15s, box-shadow 0.2s;
+}
+
+.play-btn:hover {
+    transform: scale(1.1) !important;
+    box-shadow: 0px 0px 50px rgba(209, 34, 227, 0.9);
+}
+            </style>
+
+        </head>
+
+
+        <body>
+            <div class = "Container">
+                <div class = "Pic-container" >
+                <img class = "Song-Pic" src = "PIC1NEONMOON.jpg">
+                    
+                </div>
+                <div class = "Texte">
+                    <h1 class = "Name-Song">Midnight Ascent</h1>
+                    <p class = "Type-song">Aurora Vale</p>
+                </div>
+                
+ <div class="progress-container">
+    <input type="range" id="progress" min="0" max="100" value="0" step="0.1">
+    <div class="time-stamps">
+        <span id="current-time">0:00</span>
+        <span id="total-time">0:00</span>
+    </div>
+</div>
+
+<div class="controls">
+    <button class="ctrl-btn" id="shuffle-btn" title="Shuffle"><i class="fa-solid fa-shuffle"></i></button>
+    <button class="ctrl-btn" id="prev-btn"><i class="fa-solid fa-backward-step"></i></button>
+    <button class="ctrl-btn play-btn" id="play-btn"><i class="fa-solid fa-play" id="play-icon"></i></button>
+    <button class="ctrl-btn" id="next-btn"><i class="fa-solid fa-forward-step"></i></button>
+    <button class="ctrl-btn" id="repeat-btn" title="Repeat"><i class="fa-solid fa-repeat"></i></button>
+</div>
+
+<div class="volume-container">
+    <i class="fas fa-volume-up" style="color:rgba(255,255,255,0.7); font-size:16px;"></i>
+    <input type="range" id="volume" min="0" max="100" value="50">
+</div>
+    <script>
+    const songs = [
+        { title: "Midnight Ascent", artist: "Aurora Vale", src: "SONG1.mp3", pic: "PIC1NEONMOON.jpg", duration: "4:30" },
+        { title: "Neon City", artist: "Aurora Vale", src: "SONG2.mp3", pic: "PIC2NEONCITY.jpg", duration: "3:55" },
+        { title: "Sunset Drive", artist: "Aurora Vale", src: "SONG3.mp3", pic: "PIC3SUNSET.jpg", duration: "5:10" },
+        { title: "Black Hole", artist: "Aurora Vale", src: "SONG4.mp3", pic: "PIC4BLACKHOLE.jpg", duration: "4:00" },
+    ];
+
+    let currentIndex = 0;
+    let isPlaying = false;
+    let isShuffle = false;
+    let isRepeat = false;
+
+    const audio = new Audio();
+    const progressSlider = document.getElementById('progress');
+    const volumeSlider = document.getElementById('volume');
+    const playIcon = document.getElementById('play-icon');
+    const currentTimeEl = document.getElementById('current-time');
+    const totalTimeEl = document.getElementById('total-time');
+    const playBtn = document.getElementById('play-btn');
+
+    function formatTime(secs) {
+        if (isNaN(secs)) return '0:00';
+        const m = Math.floor(secs / 60);
+        const s = Math.floor(secs % 60).toString().padStart(2, '0');
+        return `${m}:${s}`;
+    }
+
+    function loadSong(index) {
+        const song = songs[index];
+        document.querySelector('.Name-Song').textContent = song.title;
+        document.querySelector('.Type-song').textContent = song.artist;
+        document.querySelector('.Song-Pic').src = song.pic;
+        audio.src = song.src;
+        progressSlider.value = 0;
+        currentTimeEl.textContent = '0:00';
+        totalTimeEl.textContent = song.duration;
+        updateSliderFill(progressSlider);
+        if (isPlaying) audio.play();
+    }
+
+    function togglePlay() {
+        if (isPlaying) {
+            audio.pause();
+            playIcon.className = 'fa-solid fa-play';
+            isPlaying = false;
+        } else {
+            audio.play();
+            playIcon.className = 'fa-solid fa-pause';
+            isPlaying = true;
+        }
+    }
+
+    function nextSong() {
+        if (isShuffle) {
+            currentIndex = Math.floor(Math.random() * songs.length);
+        } else {
+            currentIndex = (currentIndex + 1) % songs.length;
+        }
+        loadSong(currentIndex);
+    }
+
+    function prevSong() {
+        if (audio.currentTime > 3) {
+            audio.currentTime = 0;
+        } else {
+            currentIndex = (currentIndex - 1 + songs.length) % songs.length;
+            loadSong(currentIndex);
+        }
+    }
+
+    audio.addEventListener('timeupdate', () => {
+        if (!audio.duration) return;
+        const pct = (audio.currentTime / audio.duration) * 100;
+        progressSlider.value = pct;
+        currentTimeEl.textContent = formatTime(audio.currentTime);
+        updateSliderFill(progressSlider);
+    });
+
+    audio.addEventListener('loadedmetadata', () => {
+        totalTimeEl.textContent = formatTime(audio.duration);
+    });
+
+    audio.addEventListener('ended', () => {
+        if (isRepeat) {
+            audio.currentTime = 0;
+            audio.play();
+        } else {
+            nextSong();
+        }
+    });
+
+    progressSlider.addEventListener('input', () => {
+        if (audio.duration) {
+            audio.currentTime = (progressSlider.value / 100) * audio.duration;
+        }
+        updateSliderFill(progressSlider);
+    });
+
+    volumeSlider.addEventListener('input', () => {
+        audio.volume = volumeSlider.value / 100;
+        updateSliderFill(volumeSlider);
+    });
+
+    document.getElementById('play-btn').addEventListener('click', togglePlay);
+    document.getElementById('next-btn').addEventListener('click', nextSong);
+    document.getElementById('prev-btn').addEventListener('click', prevSong);
+
+    document.getElementById('shuffle-btn').addEventListener('click', () => {
+        isShuffle = !isShuffle;
+        document.getElementById('shuffle-btn').classList.toggle('active', isShuffle);
+    });
+
+    document.getElementById('repeat-btn').addEventListener('click', () => {
+        isRepeat = !isRepeat;
+        document.getElementById('repeat-btn').classList.toggle('active', isRepeat);
+    });
+
+    function updateSliderFill(slider) {
+        const value = (slider.value - slider.min) / (slider.max - slider.min) * 100;
+        slider.style.background = `linear-gradient(to right, #d122e3 ${value}%, rgba(255, 255, 255, 0.1) ${value}%)`;
+    }
+
+    audio.volume = 0.5;
+    updateSliderFill(volumeSlider);
+    loadSong(currentIndex);
+</script>
+        </body>
+    </html>
